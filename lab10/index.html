@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet">
+    <title></title>
+    <style>
+    body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: #000;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.back {
+    background-image: url(./img/1.jpg);
+    height: 100%;
+    width: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transition: all 0.1s;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.back:hover {
+    background-position: 0 -5vh;
+}
+.disappear {
+    position: absolute;
+    top: -100vh;
+    transition: all 2s;
+}
+.lamp {
+    background-image: url(./img/lamp1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    margin-right: 5px;
+}
+
+.lamp:active {
+    background-image: url(./img/lamp2.png);
+}
+
+.wizzard {
+    background-image: url(./img/2.jpg);
+    background-size: contain;
+    width: 384px;
+    height: 288px;
+    margin-right: 50px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+    visibility: hidden;
+}
+
+.view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+.hat {
+    background-image: url(./img/hat.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    z-index: 2;
+}
+#animal {
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    transition: top 0.5s;
+    top: 0px;
+}
+#animal.rabbit {
+    background-image: url(./img/rabbit.png);
+}
+#animal.bird {
+    background-image: url(./img/bird.png);
+}
+#animal.move {
+    top: 110px;
+}
+.light {
+    pointer-events: none;
+    position: absolute;
+    top: 80px;
+    border-bottom: 500px solid yellow;
+    opacity: .3;
+    border-left: 450px solid transparent;
+    border-right: 450px solid transparent;
+    height: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+    visibility: hidden;
+    z-index: 2;
+}
+    </style>
+</head>
+<body>
+    <div class="back"></div>
+    <div class="lamp"></div>
+    <div class="action">
+        <div class="wizzard"></div>
+        <div class="view">
+            <div id="animal" class="rabbit"></div>
+            <div class="hat"></div>
+        </div>
+    </div>
+    <div class="light"></div>
+    <script>
+const back = document.querySelector(".back");
+const animal = document.querySelector("#animal");
+const view = document.querySelector(".view");
+const lamp = document.querySelector(".lamp");
+const action =  document.querySelector(".action");
+const light = document.querySelector(".light");
+
+back.addEventListener("click", () => {
+    back.classList.add("disappear");
+    console.log(back.classList);
+})
+
+view.addEventListener("click", () =>
+{
+    animal.style.top = "120px";
+    if (animal.classList.contains("rabbit"))
+    {
+        setTimeout(() => {animal.classList = "bird"}, 500);
+    } else
+    {
+        setTimeout(() => {animal.classList = "rabbit"}, 500);
+    }
+    setTimeout(() => {animal.style.top = "0px";}, 500);
+})
+lamp.addEventListener("click", () =>{
+    if (action.style.visibility == "hidden" || action.style.visibility == "")
+    {
+        action.style.visibility = "visible";
+        light.style.visibility = "visible";
+    } else {
+        action.style.visibility = "hidden";
+        light.style.visibility = "hidden";
+    }
+})
+</script>
+</body>
+</html>
